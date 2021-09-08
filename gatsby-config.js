@@ -11,8 +11,17 @@
      category: ["Laravel", "Vue.js", "React"],
      user: { name: "hinomaruc", email: "hinomaru@gmail.com" },
    },
-   /* Your site config here */ 
+   /* Your site config here */
    plugins: [
+     `gatsby-transformer-sharp`,
+     `gatsby-plugin-sharp`,
+     {
+       resolve: `gatsby-source-filesystem`,
+       options: {
+         name: `images`,
+         path: `${__dirname}/src/images`,
+       },
+     },
      {
        resolve: `gatsby-source-filesystem`,
        options: {
@@ -21,5 +30,20 @@
        },
      },
      "gatsby-transformer-remark",
+     `gatsby-plugin-sharp`,
+     {
+       resolve: `gatsby-transformer-remark`,
+       options: {
+         plugins: [
+           `gatsby-remark-relative-images`,
+           {
+             resolve: `gatsby-remark-images`,
+             options: {
+               maxWidth: 700,
+             },
+           },
+        ],
+      },
+    },
    ],
  }

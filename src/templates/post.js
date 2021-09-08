@@ -2,6 +2,7 @@
 import React from "react"
 import Layout from "../components/layout"
 import { graphql } from "gatsby"
+import Img from "gatsby-image"
 
 const BlogPostTemplate = ({ data, location }) => {
   const post = data.markdownRemark
@@ -10,6 +11,9 @@ const BlogPostTemplate = ({ data, location }) => {
 
   return (
     <Layout>
+    <Img
+      fixed={data.markdownRemark.frontmatter.topImage.childImageSharp.fixed}
+    />
       <h1>{post.frontmatter.title}</h1>
       <div dangerouslySetInnerHTML={{ __html: post.html }} />
     </Layout>
@@ -26,6 +30,13 @@ export const query = graphql`
         frontmatter {
           date
           title
+          topImage {
+            childImageSharp {
+              fixed(width: 700) {
+                ...GatsbyImageSharpFixed
+              }
+            }
+          }
         }
       }
    }
